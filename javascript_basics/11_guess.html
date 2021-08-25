@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>Opgave 8</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link rel="stylesheet" href="stylesheet.css">
+    </head>
+
+    
+
+<!-- BODY  -->
+    <body>
+
+        <h2> Gæt et tal mellem 0 og 20 </h2>
+        <input type="text" id="gaet"> 
+        <button> Udregn </button>
+        <button id="nyt_spil">Nyt Spil</button>
+
+        <script>
+            let tal = Math.round(Math.random()* 20);
+            console.log(tal);
+            let gaet; 
+            let forsoeg = 1;
+            
+            document.querySelector("button").addEventListener("click", gaetTal);
+            document.querySelector("#nyt_spil").addEventListener("click",nytSpil);
+            document.querySelector("#nyt_spil").style.visibility = "hidden";
+
+
+            function gaetTal() {
+                gaet = document.querySelector("#gaet").value;
+
+                if (gaet == tal) {
+                    console.log("Du gættede rigtigt efter " + forsoeg + " forsøg!");
+                
+                    document.querySelector("#nyt_spil").style.visibility = "visible";
+                    document.querySelector("button").style.visibility = "hidden";    
+                
+                }
+
+                else if (gaet < tal) {
+                    console.log("For lavt. Prøv igen!");
+                    forsoeg++;
+                }
+
+                else {
+                    console.log("For højt. Prøv igen!");
+                    forsoeg++;
+                }
+            }
+
+            function nytSpil() {
+                location.reload();
+                }
+
+    
+        </script>
+    
+    </body>
+</html>

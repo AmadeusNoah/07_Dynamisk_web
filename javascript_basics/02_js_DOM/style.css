@@ -1,0 +1,38 @@
+
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+header {
+    border: 1px solid black;
+}
+
+h1  {
+    text-align: center;
+}
+
+article  {
+    border: 1px black solid;
+}
+
+section {
+    margin-right: 2rem;
+    margin-left: 2rem;
+    gap: 2rem;
+}
+
+footer  {
+    text-align: center;
+    border: 1px black solid;
+    margin-top: 2rem;
+}
+
+@media(min-width: 600px) {
+    
+    section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}

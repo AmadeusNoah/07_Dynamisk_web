@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>Opgave 8</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link rel="stylesheet" href="stylesheet.css">
+    </head>
+
+    
+
+<!-- BODY  -->
+    <body>
+
+        <h2> Dateudregner </h2>
+
+        <p>Din alder</p>
+        <input type="text" id="dinAlderText"> 
+
+        <p>Dates alder</p>
+        <input type="text" id="datesAlderText">
+        
+        <button> Udregn </button>
+
+        <script>
+            let mig = document.querySelector("#dinAlderText").value;
+            let date = document.querySelector("#datesAlderText").value;
+            let dateReglMin = Math.round(mig / 2 + 7);
+            let dateReglMax = Math.round(mig * 2 + 7);
+
+            document.querySelector("button").addEventListener("click", button_clicked);
+
+            function button_clicked () {
+            if (mig < 15 || date < 15) {
+                console.log("Pedoalarm");
+            }
+
+            else {
+                if (date >= dateReglMin && date <= dateReglMax) {
+                console.log("Alt OK - I dater bare!");
+                }
+
+                else if (date <= dateReglMin) {
+                console.log("Du er " + mig + " og din date er " + date + ", så din date er for " + (dateReglMin - date) + " år for ung :(");
+                }
+
+                else if (date >= dateReglMax) {
+                console.log("Du er " + mig + " og din date er " + date + ", så din date er for " + (date - dateReglMin) + " år for gammel :(");
+                }
+
+            }
+        }
+    
+
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>Opgave 8</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+        <link rel="stylesheet" href="stylesheet.css">
+    </head>
+
+    
+
+<!-- BODY  -->
+    <body>
+
+        <script>
+            const co2 = 109;
+            let timer = 6;
+            let co2UdledtIKgVedFlyrejse = co2 * timer;
+            let resultat;
+
+            if (co2UdledtIKgVedFlyrejse < 100) {
+                resultat = "Tæt på Thunberg";
+
+            } else if (co2UdledtIKgVedFlyrejse <= 200) {
+                resultat = "Ja ja, du behøver ikke at melde dig ud af Å!";
+
+            } else if (co2UdledtIKgVedFlyrejse <= 600) {
+                resultat = "Det er godt for turismen i nordeuropa";
+
+            } else if (co2UdledtIKgVedFlyrejse > 600) {
+                resultat = "Nå ja vi kan jo altid kolonisere en anden planet...";
+            }
+
+            console.log(`Du har fløjet ${timer} timer og udledt ${co2UdledtIKgVedFlyrejse} kg CO2.`);
+
+        
+        </script>
+
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <title>Opgave 3 </title>
+    </head>
+
+    
+
+<!-- BODY  -->
+    <body>
+        <main>
+            <input type="text" id="name">
+
+            <button>Klik og kig i konsol</button>
+            
+        </main>
+       
+
+        <script>
+            document.querySelector("button").addEventListener("click",buttonClicked)
+
+            function buttonClicked(){
+               let brugerNavn = document.querySelector("#name").value;
+                console.log(`Tillykke dit navn er ${brugerNavn}`);
+            }
+        </script>
+
+    </body>
+</html>
