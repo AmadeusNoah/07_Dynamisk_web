@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>02_js_DOM</title>
     <link rel="stylesheet" href="style.css">
 
 
@@ -44,7 +43,12 @@
 
     ///HEADER///
     let header = document.querySelector("header")
-    let h1  = document.querySelector("header h1")
+    let overskrift   = document.querySelector("header h1")
+    overskrift.textContent;
+    console.log(overskrift.textContent)
+    overskrift.textContent = "Overskrift ændret med JS";
+    console.log(overskrift.textContent)
+
     
     ///SECTION 1///
     let s1  = document.querySelector(".s1")
@@ -55,21 +59,41 @@
     let s2  = document.querySelector(".s2")
     let art1  = document.querySelector(".s2 article:nth-child(1)")
     let img1  = document.querySelector(".s2 article:nth-child(1) img")
+
     let h3_s1  = document.querySelector(".s2 article:nth-child(1) h3")
+    h3_s1.textContent;
+    console.log(h3_s1.textContent);
+    h3_s1.textContent = "H3 i Artikel 1 ændret med JS";
+    console.log(h3_s1.textContent);
+
     let p_s1  = document.querySelector(".s2 article:nth-child(1) p")
-    
+    p_s1.textContent;
+    console.log(p_s1.textContent);
+    p_s1.textContent = "P tekst i Artikel 2 ændret med JS";
+    console.log(p_s1.textContent);
+
     ///ARTICLE 2///
     let art2  = document.querySelector(".s2 article:nth-child(2)")
     let img2  = document.querySelector(".s2 article:nth-child(2) img")
+
     let h3_s2  = document.querySelector(".s2 article:nth-child(2) h3")
+    h3_s2.textContent;
+    console.log(h3_s2.textContent);
+    h3_s2.textContent = "H3 i Artikel 2 ændret med JS";
+    console.log(h3_s2.textContent);
+
     let p_s2  = document.querySelector(".s2 article:nth-child(2) p")
+    p_s2.textContent;
+    console.log(p_s2.textContent);
+    p_s2.textContent = "P tekst i Artikel 2 ændret med JS";
+    console.log(p_s2.textContent);
 
     ///FOOTER///
     let footer = document.querySelector("footer")
     let footer_p  = document.querySelector("footer p")
 
     console.log(header)
-    console.log(h1)
+    console.log(overskrift )
     console.log(s1)
     console.log(s2)
     console.log(art1)

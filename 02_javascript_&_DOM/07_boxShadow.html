@@ -21,7 +21,7 @@
         </section>
 
         <section class="s2">
-            <article>
+            <article class="artikel1">
                 <img src="Bileder/billede1.jpg" alt="Billede1" class="b1">
                 <h3>Article 1</h3>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde quidem consectetur expedita, dolor delectus alias autem, pariatur voluptatum enim explicabo temporibus magni ex quo quod!</p>
@@ -33,18 +33,22 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quas voluptas suscipit deleniti minima quos natus inventore architecto culpa modi nihil velit, eius sequi necessitatibus?</p>
             </article>
         </section>
-    </main>:
+    </main>
 
     <footer>
         <p>This is the footer</p>
     </footer>
+    
 </body>
 
 <script>
+window.addEventListener("DOMContentLoaded", start)
+    console.log('DOM fully loaded and parsed');
 
+function start () {
     ///HEADER///
     let header = document.querySelector("header")
-    let overskrift   = document.querySelector("header h1")
+    let overskrift = document.querySelector("header h1")
     overskrift.textContent;
     console.log(overskrift.textContent)
     overskrift.textContent = "Overskrift ændret med JS";
@@ -56,6 +60,12 @@
     let h2  = document.querySelector(".s1 h2")
 
     ///SECTION 2///
+
+    let styling = document.querySelector("article");
+    
+    styling.classList.add("styling");
+   
+
     ///ARTICLE 1///
     let s2  = document.querySelector(".s2")
     let art1  = document.querySelector(".s2 article:nth-child(1)")
@@ -74,11 +84,14 @@
     let p_s1  = document.querySelector(".s2 article:nth-child(1) p")
     p_s1.textContent;
     console.log(p_s1.textContent);
-    p_s1.textContent = "P tekst i Artikel 2 ændret med JS";
+    p_s1.textContent = "P tekst i Artikel 1 ændret med JS";
     console.log(p_s1.textContent);
+    
 
+  
     ///ARTICLE 2///
     let art2  = document.querySelector(".s2 article:nth-child(2)")
+    art2.classList.add("styling");
 
     let img2  = document.querySelector(".s2 article:nth-child(2) img")
     console.log(img2);
@@ -96,6 +109,46 @@
     console.log(p_s2.textContent);
     p_s2.textContent = "P tekst i Artikel 2 ændret med JS";
     console.log(p_s2.textContent);
+
+    ///ARTICLE 3///
+    let mainSection = document.querySelector(".s2");
+    let newArticle = document.createElement("article");
+    newArticle.classList.add("styling");
+
+    let newImg = document.createElement("img");
+    newImg.src = "https://placeimg.com/400/300/arch?t="+Math.round(Math.random()* 10);
+    console.log(newImg);
+
+    let overskrift_2 = document.createElement("h3");
+    let overskriftText = document.createTextNode ("Article 3");
+   
+
+    let p_3 = document.createElement("p");
+    let p_text = document.createTextNode ("Paragraf 3");
+      
+    mainSection.appendChild(newArticle);
+
+    newArticle.appendChild(newImg);
+
+    newArticle.appendChild(overskrift_2);
+    overskrift_2.appendChild(overskriftText);
+
+    newArticle.appendChild(p_3);
+    p_3.appendChild(p_text);
+
+    document.querySelector("article").addEventListener("mouseover", theMouseOver);
+    document.querySelector("article").addEventListener("mouseout", theMouseOut);
+
+    function theMouseOver () {
+        console.log("HEY", theMouseOver);
+        styling.classList.add("styling");
+    }
+  
+    function theMouseOut () {
+        console.log("HEY2", theMouseOut);
+        art1.classList.toggle("styling");
+    }
+ 
 
     ///FOOTER///
     let footer = document.querySelector("footer")
@@ -117,8 +170,7 @@
     console.log(footer_p)
     
 
-
-
+}
 </script>
 
 </html>

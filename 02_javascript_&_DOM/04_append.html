@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>02_js_DOM</title>
     <link rel="stylesheet" href="style.css">
 
 
@@ -42,10 +41,7 @@
 </body>
 
 <script>
-window.addEventListener("DOMContentLoaded", start)
-    console.log('DOM fully loaded and parsed');
 
-function start () {
     ///HEADER///
     let header = document.querySelector("header")
     let overskrift = document.querySelector("header h1")
@@ -106,7 +102,7 @@ function start () {
     let newArticle = document.createElement("article");
 
     let newImg = document.createElement("img");
-    newImg.src = "https://placeimg.com/400/300/arch?t="+Math.round(Math.random()* 10);
+    newImg.src = "Bileder/billede5.jpg";
     console.log(newImg);
 
     let overskrift_2 = document.createElement("h3");
@@ -150,7 +146,7 @@ function start () {
     
 
 
-}
+
 </script>
 
 </html>
