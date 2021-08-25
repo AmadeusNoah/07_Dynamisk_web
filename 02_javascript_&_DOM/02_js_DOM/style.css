@@ -21,7 +21,9 @@ section {
     margin-right: 2rem;
     margin-left: 2rem;
     gap: 2rem;
+    display: grid;
 }
+
 
 footer  {
     text-align: center;
