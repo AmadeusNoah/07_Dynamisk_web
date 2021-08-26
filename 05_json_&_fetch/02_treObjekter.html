@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+            .dyrene {
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <section class="data-container"></section>
+    <template>
+        <article class="bilerne">
+            <h3></h3>
+            <p class="mærke"></p>
+            <p class="model"></p>
+            <p class="motor"></p>
+            <p class="km"></p>
+            <p class="udstyr"></p>
+        </article>
+    </template>
+
+
+
+    <script>
+        window.addEventListener("DOMContentLoaded", start)
+        console.log('DOM fully loaded and parsed');
+        
+        function start () {
+            const container = document.querySelector(".data-container");
+            const bilTemplate = document.querySelector("template");
+
+            const fil = "treObjekter.json";
+            
+            async function hentdata(fil) {
+                const result = await fetch(fil);
+                const json = await result.json();
+                vis(json);
+            }
+
+            function vis(biler) {
+            biler.forEach(biler => {
+                let klon = bilTemplate.cloneNode(true).content;
+                klon.querySelector("h3").textContent = biler.mærke;
+                klon.querySelector(".model").src = biler.model;
+                klon.querySelector(".motor").textContent = biler.motor;
+                klon.querySelector(".km").textContent = biler.km;
+                klon.querySelector(".udstyr").textContent = biler.udstyr;
+                container.appendChild(klon);
+            })
+        }
+        hentdata(fil);
+        }
+
+    
+        </script>
+</body>
+
+    
+
+
+</html>

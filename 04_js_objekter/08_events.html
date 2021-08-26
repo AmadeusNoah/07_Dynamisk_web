@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+
+        @media(min-width: 900px) {
+    
+            .data-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            }
+            }
+        
+            @media(min-width: 1200px) {
+    
+            .data-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            }
+            }
+
+            @media(min-width: 1500px) {
+    
+            .data-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            }
+            }
+
+            img {
+                height: auto;
+                width: 100%;
+            }
+
+
+            .dyrene {
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+
+            h3 {
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                font-weight: 700;
+            }
+
+            p {
+                color: grey;
+                font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            }
+
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <section class="data-container">
+    <template>
+        <article class="dyrene">
+            <img src="" alt="" class="billede">
+            <h3></h3>
+            <p class="navn"></p>
+            <p class="info"></p>
+            <p class="levested"></p>
+        </article>
+    </template>
+    </section>
+
+
+    <script>
+        window.addEventListener("DOMContentLoaded", start)
+        console.log('DOM fully loaded and parsed');
+        
+        let film = [
+                {"navn": "A Calling", "skuespiller" : "Christian Bengtson", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-360.jpg","land" : "Danmark", "spilletid" : "20 min", "aar" : "2019"},
+                {"navn": "A Hole In My Heart", "skuespiller" : "Mees Peijenenburg", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-360.jpg","land" : "Holland", "spilletid" : "9 min", "aar" : "2015"},
+                {"navn": "A Place In The Sun - 110 years of genocide", "skuespiller" : "Christian Zipfel", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-360.jpg","land" : "Tyskland", "spilletid" : "20 min", "aar" : "2018"},
+                {"navn": "A Summer Place", "skuespiller" : "Alexandra Maheau", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/9ZXEAY471UE4gFwHMXeRb17p-360.jpg","land" : "Grækenland", "spilletid" : "21 min", "aar" : "2021"},
+                {"navn": "A Tower of Two", "skuespiller" : "Jacob Glogowski", "billede": "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd-360.jpg","land" : "Danmark", "spilletid" : "21 min", "aar" : "2019"}
+                ];
+
+        function start () {
+
+            const container = document.querySelector(".data-container");
+            const filmTemplate = document.querySelector("template");
+
+            film.forEach(film => {
+                let klon = filmTemplate.cloneNode(true).content;
+                klon.querySelector("img").src = film.billede;
+                klon.querySelector("h3").textContent = film.navn;
+                klon.querySelector(".info").textContent = `${film.skuespiller} | ${film.land} | ${film.spilletid} | ${film.aar}`;
+      
+                container.appendChild(klon);
+            })
+        }
+        </script>
+</body>
+
+    
+
+
+</html>
