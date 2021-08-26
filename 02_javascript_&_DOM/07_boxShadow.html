@@ -63,8 +63,7 @@ function start () {
 
     let styling = document.querySelector("article");
     
-    styling.classList.add("styling");
-   
+
 
     ///ARTICLE 1///
     let s2  = document.querySelector(".s2")
@@ -91,7 +90,6 @@ function start () {
   
     ///ARTICLE 2///
     let art2  = document.querySelector(".s2 article:nth-child(2)")
-    art2.classList.add("styling");
 
     let img2  = document.querySelector(".s2 article:nth-child(2) img")
     console.log(img2);
@@ -113,7 +111,6 @@ function start () {
     ///ARTICLE 3///
     let mainSection = document.querySelector(".s2");
     let newArticle = document.createElement("article");
-    newArticle.classList.add("styling");
 
     let newImg = document.createElement("img");
     newImg.src = "https://placeimg.com/400/300/arch?t="+Math.round(Math.random()* 10);
@@ -136,17 +133,19 @@ function start () {
     newArticle.appendChild(p_3);
     p_3.appendChild(p_text);
 
-    document.querySelector("article").addEventListener("mouseover", theMouseOver);
-    document.querySelector("article").addEventListener("mouseout", theMouseOut);
+    let artikler = document.querySelectorAll("article");
+    console.log(artikler);
+    artikler.forEach(artikel => 
+    {artikel.addEventListener("mouseover", theMouseOver); 
+    artikel.addEventListener("mouseout", theMouseOut);
+    });
 
     function theMouseOver () {
-        console.log("HEY", theMouseOver);
-        styling.classList.add("styling");
+        this.classList.add("styling");
     }
   
     function theMouseOut () {
-        console.log("HEY2", theMouseOut);
-        art1.classList.toggle("styling");
+        this.classList.toggle("styling");
     }
  
 
@@ -168,8 +167,6 @@ function start () {
     console.log(p_s2)
     console.log(footer)
     console.log(footer_p)
-    
-
 }
 </script>
 

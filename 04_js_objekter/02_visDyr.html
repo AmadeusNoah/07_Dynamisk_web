@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <article id="listevisning">
+    </article>  
+
+    <script>
+
+        window.addEventListener("DOMContentLoaded", start)
+        console.log('DOM fully loaded');
+
+        function start () {
+
+            let dyr = {
+                "navn": "Gris", 
+                "type" : "Pattegris", 
+                "billede": "http://mabe-kea.dk/E19/pics/pig.png", 
+                "levested" : "Svinefarm"
+            }
+    
+            console.log(dyr);  
+            
+            const destination = document.querySelector("#listevisning");
+            let newImg = document.createElement("img");
+            destination.innerHTML += `<p> Dyr: ${dyr.navn}, Type: ${dyr.type}, Levested: ${dyr.levested} </p>`
+            
+            newImg.src = "https://placeimg.com/400/300/arch?t="+Math.round(Math.random()* 10);
+            console.log(newImg);
+            
+
+        }
+        
+    </script>
+</body>
+
+    
+
+
+</html>
