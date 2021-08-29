@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+            .personerne {
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            section{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 10px;
+            }
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <section class="data-container"></section>
+    <template>
+        <article class="personerne">
+            <img src="" alt="" class="billede">
+            <h2 class=navn></h2>
+            <p class="email"></p>
+            <p class="hobby"></p>
+        </article>
+    </template>
+</body>
+
+<!-- SCRIPT -->
+<script>
+    window.addEventListener("DOMContentLoaded", start);
+    console.log("DOM fully loaded");
+    
+    function start () {
+        const container = document.querySelector(".data-container");
+        const personTemplate = document.querySelector("template"); 
+
+        //Data fra json database //
+        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+        const options = {
+            headers: {
+            "x-apikey": "600fe9211346a1524ff12e31",
+        },
+        };
+        
+        
+        async function hentdata() {
+            const result = await fetch(url, options);
+            const json = await result.json();
+            vis(json);
+            console.log(json);
+        }
+
+        function vis(personer) {
+            personer.forEach(personer => {
+             let klon = personTemplate.cloneNode(true).content;
+             klon.querySelector("h2").textContent = personer.fornavn;
+             klon.querySelector("img").src = "faces/" + personer.billede;
+             klon.querySelector(".email").textContent ="E-mail: " + personer.email;
+             klon.querySelector(".hobby").textContent ="Hobby: " + personer.hobby;
+            container.appendChild(klon);
+            });
+    }
+    hentdata();
+    }
+    </script>
+    
+
+
+</html>
