@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+            .personerne {
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            section{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 20px;
+            }
+
+            .valgt {
+                background-color:red;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <header>
+        <h1> Alle </h1>
+    </header>
+    <nav>
+        <button data-troende="alle" class="valgt"> Alle </button>
+        <button data-troende="ja"> Troende </button>
+        <button data-troende="nej"> Ikke Troende </button>
+        <button data-troende="tvivler"> Tvivler </button>
+    </nav>
+
+    <section class="data-container"></section>
+    <template>
+        <article class="personerne">
+            <img src="" alt="" class="billede">
+            <h2 class=navn></h2>
+            <p class="email"></p>
+            <p class="hobby"></p>
+            <p class="troende"></p>
+        </article>
+    </template>
+</body>
+
+<!-- SCRIPT -->
+<script>
+
+    // Eventlister som lytter på om al DOM er loaded, og som starter fuctionen 'start'
+    window.addEventListener("DOMContentLoaded", start);
+    console.log("DOM fully loaded");
+
+    const container = document.querySelector(".data-container");
+    const personTemplate = document.querySelector("template"); 
+    const jsonData = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+    const options = {headers: {"x-apikey": "600fe9211346a1524ff12e31",},};
+    const header = document.querySelector("header h1");
+    let personer;
+    let filter = "alle";
+    
+    // Functionen 'start' sættes igang
+    function start () {
+        const filterKnapper = document.querySelectorAll("nav button");
+        filterKnapper.forEach (knap => knap.addEventListener("click", filtrerPersoner));
+        hentdata();
+    }
+
+    function filtrerPersoner() {
+        filter = this.dataset.troende; 
+        visPersoner();
+        header.textContent = this.textContent;
+    }
+        
+    // Sitet synkroniserer med data fra json database
+        async function hentdata() {
+        const result = await fetch(jsonData, options);
+        personer = await result.json();
+        console.log(personer);
+        visPersoner();
+        }
+
+    // Functionen kører hver datapoint gennem fra json og opretter en klon med nedestående parametre.
+    function visPersoner() {
+        container.textContent = "";  
+        personer.forEach(person => {
+            if (filter == person.troende || filter == "alle") {
+                let klon = personTemplate.cloneNode(true).content;
+                klon.querySelector("h2").textContent = person.fornavn;
+                klon.querySelector("img").src = "faces/" + person.billede;
+                klon.querySelector(".email").textContent ="E-mail: " + person.email;
+                klon.querySelector(".hobby").textContent ="Hobby: " + person.hobby;
+                klon.querySelector(".troende").textContent ="Troende: " + person.troende;
+                container.appendChild(klon);
+            }
+        });
+     }
+    </script>
+
+</html>
