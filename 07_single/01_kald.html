@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+            .personerne {
+                border: 1px solid black;
+                margin-bottom: 10px;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            section{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 20px;
+            }
+
+            .valgt {
+                background-color:red;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <header>
+        <h1> Alle </h1>
+    </header>
+    <nav>
+        <button data-troende="alle" class="valgt"> Alle </button>
+        <button data-troende="ja"> Troende </button>
+        <button data-troende="nej"> Ikke Troende </button>
+        <button data-troende="tvivler"> Tvivler </button>
+    </nav>
+
+    <!-- Data containeren bruges som den tomme skal, som alt fram template bliver klonet op i med ny data fra json filen -->
+    <section class="data-container"></section>
+    <template>
+        <article class="personerne">
+            <img src="" alt="" class="billede">
+            <h2 class=navn></h2>
+            <p class="email"></p>
+            <p class="hobby"></p>
+            <p class="troende"></p>
+        </article>
+    </template>
+</body>
+
+<!-- SCRIPT -->
+<script>
+
+    // Eventlister som lytter på om al DOM er loaded, og som starter fuctionen 'start'
+    window.addEventListener("DOMContentLoaded", start);
+    console.log("DOM fully loaded");
+
+    // Laver en constant, der targeter data-containeren i html'en, hvor alt data bliver kopieret op til //
+    const container = document.querySelector(".data-container");
+    // Al data inde i templater, er skabelonen for hvordan tingene kommer til at se ud i data-containeren //
+    const personTemplate = document.querySelector("template"); 
+    // Oprettes en constant (jsonData), som linker til jsondatabasen //
+    const jsonData = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+    // Oprettes en constant (options), som tilføjet api nøgen til databasen i json //
+    const options = {headers: {"x-apikey": "600fe9211346a1524ff12e31",},};
+    // Oprettes en constant, som linker til h1 i headeren i HTML //
+    const header = document.querySelector("header h1");
+    // Oprettes en tom constant, fordi så har jeg en generel som gælder i alle functions nedenfor i scriptet //
+    let personer;
+
+    // Oprettes en variabel (Filder), som skriver tekste "alle"(Er i tvivl om denne) //
+    let filter = "alle";
+    
+    // Functionen 'start' sættes igang
+    function start () {
+        // Oprettest en constant (filterKnapper), som linker til button i nav i HTML //
+        const filterKnapper = document.querySelectorAll("nav button");
+        // For hver knap der er i constanten filderKnapper, lytter den efter "click" og starter derefter fuctionen filtrerPersoner //
+        filterKnapper.forEach (knap => knap.addEventListener("click", filtrerPersoner));
+        // Her henter scriptet data ind fra JSON filen //
+        hentdata();
+    }
+
+    // Her starter functionen filtrerePersoner //
+    function filtrerPersoner() {
+        // Her defineres variablen 'filter', som får indholdet fra (this = den knap der er trykket på) jf. datasættet.troende i HTML'en //
+        filter = this.dataset.troende; 
+        // Her fjernes classen .valgt fra den givende knap der er trykket på //
+        document.querySelector(".valgt").classList.remove("valgt");
+        // Her tilføjes classen valgt til den givende knap der er trykket på //
+        this.classList.add("valgt");
+        // Her vises personerne på ny med det ovenstående filder, der er tilføjet ved tryk på knappen //
+        visPersoner();
+        // Her ændres textContent i constanten 'header' til indholdet, af den knap som der er trykket på //
+        header.textContent = this.textContent;
+    }
+        
+    // Sitet synkroniserer med data fra json database
+        // Her hentes data fra json 
+        async function hentdata() {
+        // Her oprettes constanten 'result', som består af fetch af jsonData(link til database) & options(api key) //    
+        const result = await fetch(jsonData, options);
+        // Her giver vi gobal-variablen 'personer' en egenskab, hvor den afventer constaten 'result' //
+        personer = await result.json();
+        // Her consol-logger jeg variablen personer (er oprettet globalt, men som har fået værdi her i denne fuction) //
+        console.log(personer);
+        // Her vises personerne fra json databasen //
+        visPersoner();
+        }
+
+    // Functionen kører hver datapoint gennem fra json og opretter en klon med nedestående parametre. //
+    function visPersoner() {
+        // Teksten i global-constaten 'container' fjernes //
+        container.textContent = "";  
+        // Her kørrest arrayet (listen fra json) igennem, hvor for hver person der er på listen, så sker følgende: //
+        personer.forEach(person => {
+            // En if fuction, hvor den følger feltet 'troende' på hver person i json filen og udvælger 'alle' ergo den filterer ikke //
+            if (filter == person.troende || filter == "alle") {
+                // Her opretter vi variablen 'klon', som kloner nedestående content //
+                let klon = personTemplate.cloneNode(true).content;
+                // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
+                klon.querySelector("h2").textContent = person.fornavn;
+                // Her targeter vi billedet i html og gør den = faces/ + iden fra person.billede i json filen //
+                klon.querySelector("img").src = "faces/" + person.billede;
+                // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
+                klon.querySelector(".email").textContent ="E-mail: " + person.email;
+                // Her targeter vi classen .hobby og ændre textindholdet til : Teksten "Hobby: " og tilføjer dataen person.hobby fra json filen) //
+                klon.querySelector(".hobby").textContent ="Hobby: " + person.hobby;
+                // Her targeter vi classen .troende og ændre textindholdet til : Teksten "Troende: " og tilføjer dataen person.troende fra json filen) //
+                klon.querySelector(".troende").textContent ="Troende: " + person.troende;
+
+                klon.querySelector(".personerne").addEventListener("click", () =>  visDetaljer (person));
+
+                
+                // Her opretter vi et childelement til i constanten container //
+                container.appendChild(klon);
+            }
+        });
+     }
+        
+    function visDetaljer(hvem) {
+        location.href = `02_detalje.html?id=${hvem._id}`;
+    }
+
+</script>
+
+</html>

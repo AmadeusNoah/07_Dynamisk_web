@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="da">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
+        <style>
+            .personerne {
+                border: 1px solid black;
+                margin-bottom: 10px;
+                background-color: red;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+
+            section{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 20px;
+            }
+
+            .valgt {
+                background-color:red;
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+
+    
+
+<!-- BODY  -->
+<body>
+    <header>
+        <h1> Alle </h1>
+    </header>
+    <nav>
+        <button data-troende="alle" class="valgt"> Alle </button>
+        <button data-troende="ja"> Troende </button>
+        <button data-troende="nej"> Ikke Troende </button>
+        <button data-troende="tvivler"> Tvivler </button>
+    </nav>
+
+    <!-- Data containeren bruges som den tomme skal, som alt fram template bliver klonet op i med ny data fra json filen -->
+    <section class="data-container"></section>
+        <article class="personerne">
+            <img src="" alt="" class="billede">
+            <h2 class=navn></h2>
+            <p class="email"></p>
+            <p class="hobby"></p>
+            <p class="troende"></p>
+        </article>
+</body>
+
+<!-- SCRIPT -->
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("id");
+    console.log(id);
+
+</script>
+
+</html>
