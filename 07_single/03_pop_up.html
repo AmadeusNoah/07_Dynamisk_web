@@ -16,7 +16,7 @@
                 height: auto;
             }
 
-            section{
+            .data-container{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 gap: 20px;
@@ -24,6 +24,34 @@
 
             .valgt {
                 background-color:red;
+            }
+
+            #popup {
+                background-color: rgba(0, 0, 0, 0.623);
+                position: fixed;
+                top: 0;
+                display: none;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            #popup img {
+            }
+
+            #popup button {
+                position: absolute;
+                top: -10px;
+                left: -10px;
+            }
+
+            #popup article {
+                position: relative;
+                width: 40%;
+                margin: 4rem auto;
+                border-radius: 25px;
+                padding: 12px;
+                background-color: white;
+                text-align: center;
             }
 
             nav {
@@ -53,11 +81,23 @@
         <article class="personerne">
             <img src="" alt="" class="billede">
             <h2 class=navn></h2>
-            <p class="email"></p>
+            <p>Emil <span class="email"> </span></p>
             <p class="hobby"></p>
             <p class="troende"></p>
         </article>
     </template>
+
+    <section id="popup">
+        <article>
+            <button> X </button>
+            <img src="" alt="" class="billede">
+            <h2 class=navn></h2>
+            <p>Email: <span class="email"></span> </p>
+            <p>Hobby: <span class="hobby"></span></p>
+            <p>Troende: <span class="troende"></span></p>
+        </article>
+    </section>
+
 </body>
 
 <!-- SCRIPT -->
@@ -140,19 +180,31 @@
                 klon.querySelector(".hobby").textContent ="Hobby: " + person.hobby;
                 // Her targeter vi classen .troende og ændre textindholdet til : Teksten "Troende: " og tilføjer dataen person.troende fra json filen) //
                 klon.querySelector(".troende").textContent ="Troende: " + person.troende;
-                // Her tilføjer vi en eventlister på hver af .personerne, som når vi trykker på dem,  så kalder jeg functionen visDetaljer(person) //
-                klon.querySelector(".personerne").addEventListener("click", () =>  visDetaljer (person));                
+
+                klon.querySelector("article").addEventListener ("click", ()=> visDetaljer(person));
                 // Her opretter vi et childelement til i constanten container //
                 container.appendChild(klon);
             }
         });
      }
-        
-    function visDetaljer(hvem) {
-        location.href = `02_detalje.html?id=${hvem._id}`;
-        console.log(hvem);
+
+     function visDetaljer(detaljer) {
+         const  popup = document.querySelector("#popup");
+         popup.style.display = "block";
+         popup.querySelector(".navn").textContent = detaljer.fornavn;
+         popup.querySelector("#popup img").src = "faces/" + detaljer.billede;
+         popup.querySelector(".email").textContent = detaljer.email;
+         popup.querySelector(".hobby").textContent = detaljer.hobby;
+         popup.querySelector(".troende").textContent = detaljer.troende;
+    console.log(detaljer);
     }
 
-</script>
+    document.querySelector("#popup button").addEventListener("click", lukPopup);
+
+     function lukPopup() {
+        document.querySelector("#popup").style.display = "none";
+    }
+
+    </script>
 
 </html>
