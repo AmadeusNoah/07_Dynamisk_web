@@ -5,44 +5,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noindex">
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-        
         <style>
             .retterne {
-                box-shadow: 2px 2px rgba(128, 128, 128, 0.548);
+                border: 1px solid black;
                 margin-bottom: 10px;
-                border-radius: 25px;
-            }
-
-            h1 {
-                font-family: 'Russo One', sans-serif;
-                font-weight: 500;
-            }
-
-            h2 {
-                font-size: 1.3rem;
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-            }
-
-            h3 {
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-            }
-
-            p {
-                font-family: Verdana, Geneva, Tahoma, sans-serif;
-            }
-
-            .pris {
-                font-size: 1.5rem;
             }
 
             img {
                 width: 100%;
-                height: 60%;
-                border-top-left-radius: 25px;
-                border-top-right-radius: 25px;
+                height: auto;
             }
             
             main {
@@ -52,9 +23,11 @@
 
             section {
             grid-column: 2/3;
-            grid-template-columns: 1fr 1fr 1fr;
             display: grid;
-            gap: 40px;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            align-items: center;
             justify-items: center;
             }
 
@@ -62,79 +35,23 @@
                 grid-column: 2/3;
             }
 
-            .kategori {
-                text-align: center;
-            }
 
             .valgt {
-                text-decoration: underline;
-                color: black;
+                background-color:red;
             }
 
             #top {
-                background-image: url(images/EHKsGIEWoAQ1Mx6.jpg);
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position-y: 50%;
+                background-color: orange;
                 height: 250px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                font-family: 'Russo One', sans-serif;
-                font-size: 2rem;
-                text-align: center;
             }
             
             nav {
                 padding-top: 20px;
                 gap: 20px;
                 grid-column: 2/3;
-                text-align: center;
-            }
-
-            nav button {
-                background-color: white;
-                border: none;
-                color: grey;
-                padding: 25px 15px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-            }
-
-            #popup {
-                background-color: rgba(0, 0, 0, 0.623);
-                position: fixed;
-                top: 0;
-                display: none;
-                width: 100vw;
-                height: 100vh;
-            }
-
-            .data-container{
-                text-align: center;
-                padding-bottom: 3rem;
-                padding-top: 1rem;
-            }
-
-            #popup button {
-                position: absolute;
-                top: -10px;
-                left: -10px;
-                width: 35px;
-                height: 35px;
-                border-radius: 100%;
-            }
-
-            #popup article {
-                position: relative;
-                width: 40%;
-                margin: 15rem auto;
-                border-radius: 25px;
-                padding: 12px;
-                background-color: white;
-                text-align: center;
             }
 
             footer {
@@ -144,27 +61,6 @@
                 justify-content:space-evenly;
             }
 
-            @media(min-width: 600px) { 
-            
-            section {
-            grid-column: 2/3;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            justify-items: center;
-            }
-
-            @media(min-width: 900px) { 
-
-            section {
-            grid-column: 2/3;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 40px;
-            justify-items: center;
-            }
-            
-            }
         </style>
     </head>
 
@@ -180,16 +76,16 @@
     <main>
     <nav>
         <button data-kategori="alle" class="valgt"> Alle </button>
-        <button data-kategori="forretter"> Forretter </button>
-        <button data-kategori="hovedretter"> Hovedretter </button>
-        <button data-kategori="desserter"> Desserter </button>
-        <button data-kategori="sideorders"> Sideorders </button>
-        <button data-kategori="drikkevarer"> Drikkevarer </button>
+        <button data-kategori="drikkevarer"> drikkevarer </button>
+        <button data-kategori="forretter"> forretter </button>
+        <button data-kategori="hovedretter"> hovedretter </button>
+        <button data-kategori="desserter"> desserter </button>
+        <button data-kategori="sideorders"> sideorders </button>
     </nav>
 
 
     <header>
-        <h1 class="kategori"> Alle </h1>
+        <h1> Alle </h1>
     </header>
 
     <!-- Data containeren bruges som den tomme skal, som alt fram template bliver klonet op i med ny data fra json filen -->
@@ -202,17 +98,6 @@
             <p class="pris"></p>
         </article>
     </template>
-
-    <section id="popup">
-        <article>
-            <button> X </button>
-            <img src="" alt="" class="billede">
-            <h2 class="navn"></h2>
-            <p><span class="kortbeskrivelse"></span> </p>
-            <p>Pris: <span class="pris"></span> DKK</p>
-
-        </article>
-    </section>
 
     </main>
 
@@ -303,37 +188,19 @@
             if (filter == ret.kategori || filter == "alle") {
                 // Her opretter vi variablen 'klon', som kloner nedestående content //
                 let klon = menuTemplate.cloneNode(true).content;
-                // Her targeter vi texten i h2 og gør den = ret.fornavn (i json filen) //
+                // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
                 klon.querySelector("h2").textContent = ret.navn;
                 // Her targeter vi billedet i html og gør den = faces/ + iden fra person.billede i json filen //
                 klon.querySelector("img").src = "bistro_billeder/" + ret.billednavn + "-md.jpg";
                 // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
                 klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
                 // Her targeter vi classen .hobby og ændre textindholdet til : Teksten "Hobby: " og tilføjer dataen person.hobby fra json filen) //
-                klon.querySelector(".pris").textContent ="Pris: " + ret.pris + " DKK";    
-                // Her tilføjer vi en eventlister på hver af .personerne, som når vi trykker på dem,  så kalder jeg functionen visDetaljer(person) //
-                klon.querySelector("article").addEventListener ("click", ()=> visDetaljer(ret)); 
+                klon.querySelector(".pris").textContent ="Pris: " + ret.pris;    
                 // Her opretter vi et childelement til i constanten container //
                 container.appendChild(klon);
             }
         });
      }
-
-     function visDetaljer(detaljer) {
-         const  popup = document.querySelector("#popup");
-         popup.style.display = "block";
-         popup.querySelector(".navn").textContent = detaljer.fornavn;
-         popup.querySelector("#popup img").src = "bistro_billeder/" + detaljer.billednavn + "-md.jpg";
-         popup.querySelector(".kortbeskrivelse").textContent = detaljer.langbeskrivelse;
-         popup.querySelector(".pris").textContent = detaljer.pris;
-    console.log(detaljer);
-    }
-
-    document.querySelector("#popup button").addEventListener("click", lukPopup);
-
-     function lukPopup() {
-        document.querySelector("#popup").style.display = "none";
-    }
     </script>
 
 </html>
