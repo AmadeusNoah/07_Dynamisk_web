@@ -11,13 +11,38 @@
         
         <style>
             .retterne {
-                box-shadow: 2px 2px grey;
+                box-shadow: 2px 2px rgba(128, 128, 128, 0.548);
                 margin-bottom: 10px;
+                border-radius: 25px;
+            }
+
+            h1 {
+                font-family: 'Russo One', sans-serif;
+                font-weight: 500;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            h3 {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            p {
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+
+            .pris {
+                font-size: 1.5rem;
             }
 
             img {
                 width: 100%;
-                height: auto;
+                height: 60%;
+                border-top-left-radius: 25px;
+                border-top-right-radius: 25px;
             }
             
             main {
@@ -105,7 +130,7 @@
             #popup article {
                 position: relative;
                 width: 40%;
-                margin: 4rem auto;
+                margin: 15rem auto;
                 border-radius: 25px;
                 padding: 12px;
                 background-color: white;
@@ -124,13 +149,13 @@
             section {
             grid-column: 2/3;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
             justify-items: center;
             }
 
             @media(min-width: 900px) { 
-            
+
             section {
             grid-column: 2/3;
             display: grid;
@@ -182,9 +207,9 @@
         <article>
             <button> X </button>
             <img src="" alt="" class="billede">
-            <h2 class=navn></h2>
-            <p>Beskrivelse: <span class="kortbeskrivelse"></span> </p>
-            <p>Pris: <span class="pris"></span></p>
+            <h2 class="navn"></h2>
+            <p><span class="kortbeskrivelse"></span> </p>
+            <p>Pris: <span class="pris"></span> DKK</p>
 
         </article>
     </section>
@@ -278,14 +303,14 @@
             if (filter == ret.kategori || filter == "alle") {
                 // Her opretter vi variablen 'klon', som kloner nedestående content //
                 let klon = menuTemplate.cloneNode(true).content;
-                // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
+                // Her targeter vi texten i h2 og gør den = ret.fornavn (i json filen) //
                 klon.querySelector("h2").textContent = ret.navn;
                 // Her targeter vi billedet i html og gør den = faces/ + iden fra person.billede i json filen //
                 klon.querySelector("img").src = "bistro_billeder/" + ret.billednavn + "-md.jpg";
                 // Her targeter vi texten i h2 og gør den = person.fornavn (i json filen) //
                 klon.querySelector(".kortbeskrivelse").textContent = ret.kortbeskrivelse;
                 // Her targeter vi classen .hobby og ændre textindholdet til : Teksten "Hobby: " og tilføjer dataen person.hobby fra json filen) //
-                klon.querySelector(".pris").textContent ="Pris: " + ret.pris;    
+                klon.querySelector(".pris").textContent ="Pris: " + ret.pris + " DKK";    
                 // Her tilføjer vi en eventlister på hver af .personerne, som når vi trykker på dem,  så kalder jeg functionen visDetaljer(person) //
                 klon.querySelector("article").addEventListener ("click", ()=> visDetaljer(ret)); 
                 // Her opretter vi et childelement til i constanten container //
